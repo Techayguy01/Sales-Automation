@@ -1,0 +1,1765 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.env.example
+.gitignore
+index.html
+metadata.json
+package.json
+README.md
+src/App.tsx
+src/components/Analytics.tsx
+src/components/Campaigns.tsx
+src/components/CRM.tsx
+src/components/DashboardHome.tsx
+src/components/EmailTemplates.tsx
+src/components/FollowUps.tsx
+src/components/Help.tsx
+src/components/Inbox.tsx
+src/components/PipelineRunner.tsx
+src/components/Prospects.tsx
+src/components/Settings.tsx
+src/Dashboard.tsx
+src/index.css
+src/main.tsx
+tsconfig.json
+vite.config.ts
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".env.example">
+# GEMINI_API_KEY: Required for Gemini AI API calls.
+# AI Studio automatically injects this at runtime from user secrets.
+# Users configure this via the Secrets panel in the AI Studio UI.
+GEMINI_API_KEY="MY_GEMINI_API_KEY"
+
+# APP_URL: The URL where this applet is hosted.
+# AI Studio automatically injects this at runtime with the Cloud Run service URL.
+# Used for self-referential links, OAuth callbacks, and API endpoints.
+APP_URL="MY_APP_URL"
+</file>
+
+<file path=".gitignore">
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+</file>
+
+<file path="index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saleshandy Clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+</file>
+
+<file path="metadata.json">
+{
+  "name": "",
+  "description": "",
+  "requestFramePermissions": []
+}
+</file>
+
+<file path="src/components/Analytics.tsx">
+import React from 'react';
+
+export default function Analytics() {
+  return (
+    <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-white h-full">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h1 className="text-xl font-semibold text-gray-900">Analytics</h1>
+      </div>
+      <div className="p-6 flex-1 overflow-y-auto">
+        <p className="text-gray-500">Analytics page content will go here.</p>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/Campaigns.tsx">
+import React from 'react';
+
+export default function Campaigns() {
+  return (
+    <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-white h-full">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h1 className="text-xl font-semibold text-gray-900">Campaigns (Sequences)</h1>
+      </div>
+      <div className="p-6 flex-1 overflow-y-auto">
+        <p className="text-gray-500">Campaigns page content will go here.</p>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/CRM.tsx">
+import React from 'react';
+
+export default function CRM() {
+  return (
+    <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-white h-full">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h1 className="text-xl font-semibold text-gray-900">CRM</h1>
+      </div>
+      <div className="p-6 flex-1 overflow-y-auto">
+        <p className="text-gray-500">CRM page content will go here.</p>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/DashboardHome.tsx">
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { 
+  Building2, Star, Mail, Reply, Clock, TrendingUp, 
+  ArrowUpRight, ArrowDownRight, Play, CheckCircle2, 
+  XCircle, AlertCircle, Send, Users, Sparkles, MoreHorizontal, Plus, Search, Settings, FileText, Headphones
+} from 'lucide-react';
+import { 
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
+  PieChart, Pie, Cell, LineChart, Line
+} from 'recharts';
+
+// Fake Data
+const statsData = [
+  { id: 1, label: 'Total Prospects', value: '12,450', icon: Building2, color: 'text-gray-600', bgColor: 'bg-gray-100', trend: '+12%', trendUp: true },
+  { id: 2, label: 'High Fit Companies', value: '3,210', icon: Star, color: 'text-green-600', bgColor: 'bg-green-100', trend: '+5%', trendUp: true },
+  { id: 3, label: 'Emails Sent', value: '45,890', icon: Mail, color: 'text-blue-600', bgColor: 'bg-blue-100', trend: '+22%', trendUp: true },
+  { id: 4, label: 'Replies Received', value: '4,120', icon: Reply, color: 'text-purple-600', bgColor: 'bg-purple-100', trend: '+8%', trendUp: true },
+  { id: 5, label: 'Follow Ups Pending', value: '845', icon: Clock, color: 'text-orange-600', bgColor: 'bg-orange-100', trend: '-2%', trendUp: false },
+  { id: 6, label: 'Success Rate', value: '8.9%', icon: TrendingUp, color: 'text-teal-600', bgColor: 'bg-teal-100', trend: '+1.2%', trendUp: true },
+];
+
+const barChartData = [
+  { date: 'Mon', Sent: 4000, Replied: 400 },
+  { date: 'Tue', Sent: 3000, Replied: 350 },
+  { date: 'Wed', Sent: 5000, Replied: 550 },
+  { date: 'Thu', Sent: 4500, Replied: 480 },
+  { date: 'Fri', Sent: 6000, Replied: 700 },
+  { date: 'Sat', Sent: 2000, Replied: 150 },
+  { date: 'Sun', Sent: 1500, Replied: 100 },
+];
+
+const pieChartData = [
+  { name: 'High Fit', value: 45, color: '#16a34a' }, // green-600
+  { name: 'Medium Fit', value: 35, color: '#eab308' }, // yellow-500
+  { name: 'Low Fit', value: 20, color: '#ef4444' }, // red-500
+];
+
+const recentRuns = [
+  { id: 1, company: 'TechCorp Solutions', fit: 'High', time: '10 mins ago', status: 'Completed' },
+  { id: 2, company: 'Global Industries', fit: 'Medium', time: '1 hour ago', status: 'Completed' },
+  { id: 3, company: 'Apex Manufacturing', fit: 'High', time: '2 hours ago', status: 'Failed' },
+  { id: 4, company: 'Nexus Logistics', fit: 'Low', time: '5 hours ago', status: 'Completed' },
+  { id: 5, company: 'Quantum Robotics', fit: 'High', time: '1 day ago', status: 'Completed' },
+];
+
+const recentEmails = [
+  { id: 1, company: 'TechCorp Solutions', status: 'Sent', time: '5 mins ago', replied: false },
+  { id: 2, company: 'Global Industries', status: 'Opened', time: '15 mins ago', replied: true },
+  { id: 3, company: 'Apex Manufacturing', status: 'Bounced', time: '1 hour ago', replied: false },
+  { id: 4, company: 'Nexus Logistics', status: 'Sent', time: '2 hours ago', replied: false },
+  { id: 5, company: 'Quantum Robotics', status: 'Opened', time: '3 hours ago', replied: true },
+];
+
+export default function DashboardHome() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="flex-1 overflow-auto bg-[#F9FAFB] p-6">
+      <div className="max-w-7xl mx-auto space-y-6">
+        
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+            <p className="text-sm text-gray-500 mt-1">Overview of your ATC Sales Intelligence outreach.</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Top Row */}
+          
+          {/* Card 1: Total Prospects & AI */}
+          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col">
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900">12,450</h2>
+                <p className="text-sm text-gray-500 mt-1">Total Prospects</p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs text-gray-500">Compared to last month</p>
+                <p className="text-sm font-semibold text-green-600">+12.4%</p>
+              </div>
+            </div>
+            <div className="mt-auto bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-5 border border-blue-100 relative overflow-hidden">
+              <div className="relative z-10 text-center">
+                <h3 className="text-sm font-semibold text-blue-900 mb-1">AI Assistant</h3>
+                <p className="text-xs text-blue-700 mb-4">is analyzing your prospect list...</p>
+                <div className="h-24 flex items-center justify-center">
+                   <Sparkles className="w-12 h-12 text-blue-400 animate-pulse" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Outreach Metrics */}
+          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-base font-semibold text-gray-900">Outreach Metrics</h3>
+              <button className="p-1.5 hover:bg-gray-100 rounded-full"><MoreHorizontal className="w-4 h-4 text-gray-500"/></button>
+            </div>
+            
+            <div className="mb-6">
+              <h2 className="text-3xl font-bold text-gray-900">45,890</h2>
+              <p className="text-sm text-gray-500 mt-1">Total Emails Sent</p>
+              <p className="text-xs text-gray-400 mt-2">AI-powered outreach and follow-up insights</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mt-auto">
+              <div>
+                <h4 className="text-xl font-bold text-gray-900">4,120</h4>
+                <p className="text-xs text-gray-500">Replies Received</p>
+              </div>
+              <div>
+                <h4 className="text-xl font-bold text-gray-900">8.9%</h4>
+                <p className="text-xs text-gray-500">Success Rate</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
+              <div className="flex -space-x-2">
+                <div className="w-8 h-8 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-xs font-medium text-blue-600">TB</div>
+                <div className="w-8 h-8 rounded-full bg-green-100 border-2 border-white flex items-center justify-center text-xs font-medium text-green-600">JD</div>
+                <div className="w-8 h-8 rounded-full bg-purple-100 border-2 border-white flex items-center justify-center text-xs font-medium text-purple-600">AM</div>
+              </div>
+              <div className="flex gap-2">
+                <button className="w-8 h-8 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center hover:bg-gray-100"><Plus className="w-4 h-4 text-gray-600"/></button>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3: Fit Score & Trends */}
+          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-base font-semibold text-gray-900">Fit Score Distribution</h3>
+              <select className="text-xs bg-gray-50 border border-gray-200 rounded-md px-2 py-1 outline-none">
+                <option>Monthly</option>
+              </select>
+            </div>
+            
+            <div className="flex-1 flex items-center justify-center relative h-40">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={pieChartData} cx="50%" cy="50%" innerRadius={40} outerRadius={60} paddingAngle={2} dataKey="value" stroke="none">
+                    {pieChartData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col gap-3">
+                <div className="text-right">
+                  <p className="text-sm font-bold text-gray-900">45%</p>
+                  <p className="text-[10px] text-gray-500">High Fit</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-bold text-gray-900">35%</p>
+                  <p className="text-[10px] text-gray-500">Medium Fit</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="h-24 mt-4">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={barChartData}>
+                  <Line type="monotone" dataKey="Sent" stroke="#3b82f6" strokeWidth={2} dot={false} />
+                  <Line type="monotone" dataKey="Replied" stroke="#10b981" strokeWidth={2} dot={false} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* Bottom Row */}
+
+          {/* Card 4: Pipeline Tracking */}
+          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-base font-semibold text-gray-900">Pipeline Tracking</h3>
+              <button className="p-1.5 hover:bg-gray-100 rounded-full"><MoreHorizontal className="w-4 h-4 text-gray-500"/></button>
+            </div>
+            
+            <div className="mb-6">
+              <p className="text-xs text-gray-500 mb-1">Follow Ups Pending</p>
+              <div className="flex items-end gap-3">
+                <h2 className="text-3xl font-bold text-gray-900">845</h2>
+                <span className="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full mb-1 border border-orange-100">High Priority</span>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <p className="text-xs font-medium text-gray-700 mb-3">Prospect Engagement</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-gray-600">Opened</span>
+                    <span className="font-medium text-gray-900">40%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-blue-500 w-[40%]"></div>
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-gray-600">Clicked</span>
+                    <span className="font-medium text-gray-900">25%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-purple-500 w-[25%]"></div>
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-gray-600">Replied</span>
+                    <span className="font-medium text-gray-900">15%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-green-500 w-[15%]"></div>
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-gray-600">Bounced</span>
+                    <span className="font-medium text-gray-900">5%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-red-500 w-[5%]"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2 mt-auto">
+              <div className="flex items-center justify-between bg-gray-50 px-3 py-2 rounded-xl border border-gray-100">
+                <span className="text-xs text-gray-500">Insights</span>
+                <span className="text-xs font-medium text-gray-900">70% Positive, 20% Neutral</span>
+                <Sparkles className="w-3 h-3 text-blue-500" />
+              </div>
+              <div className="flex items-center justify-between bg-gray-50 px-3 py-2 rounded-xl border border-gray-100 cursor-pointer hover:bg-gray-100" onClick={() => navigate('/pipeline-runner')}>
+                <span className="text-xs text-gray-500">Action</span>
+                <span className="text-xs font-medium text-gray-900">Run New Pipeline</span>
+                <Play className="w-3 h-3 text-gray-400" />
+              </div>
+            </div>
+          </div>
+
+          {/* Card 5: Recent Activity Table */}
+          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col">
+            <div className="flex items-center gap-2 mb-6 bg-gray-50 p-1.5 rounded-xl border border-gray-200">
+              <Search className="w-4 h-4 text-gray-400 ml-2" />
+              <input type="text" placeholder="Search prospects..." className="bg-transparent border-none outline-none text-sm w-full text-gray-900 placeholder-gray-400" />
+              <button className="p-1.5 bg-white rounded-lg shadow-sm border border-gray-200"><Settings className="w-3.5 h-3.5 text-gray-500"/></button>
+            </div>
+
+            <div className="flex gap-4 border-b border-gray-100 mb-4 pb-2">
+              <button className="text-xs font-semibold text-gray-900 border-b-2 border-gray-900 pb-2 -mb-[9px]">All Records</button>
+              <button className="text-xs font-medium text-gray-500 hover:text-gray-700 pb-2">Pending Follow Ups</button>
+              <button className="text-xs font-medium text-gray-500 hover:text-gray-700 pb-2">Completed</button>
+            </div>
+
+            <div className="flex-1 overflow-auto no-scrollbar">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr>
+                    <th className="text-[11px] font-medium text-gray-400 pb-3 font-normal">Company</th>
+                    <th className="text-[11px] font-medium text-gray-400 pb-3 font-normal">Fit Score</th>
+                    <th className="text-[11px] font-medium text-gray-400 pb-3 font-normal text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm">
+                  {recentRuns.map((run, i) => (
+                    <tr key={i} className="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <td className="py-3 text-gray-900 font-medium">{run.company}</td>
+                      <td className="py-3 text-gray-500">{run.fit}</td>
+                      <td className="py-3 text-right">
+                        <span className={`inline-flex items-center justify-center px-2.5 py-1 rounded-full text-[10px] font-semibold ${
+                          run.status === 'Completed' ? 'bg-green-50 text-green-700 border border-green-200' :
+                          run.status === 'Failed' ? 'bg-red-50 text-red-700 border border-red-200' :
+                          'bg-yellow-50 text-yellow-700 border border-yellow-200'
+                        }`}>
+                          {run.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Card 6: AI Assistant Chat */}
+          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col relative overflow-hidden">
+            <div className="flex justify-between items-center mb-6">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-blue-600" />
+                <h3 className="text-base font-semibold text-gray-900">AI Assistant</h3>
+              </div>
+              <div className="flex gap-2">
+                <button className="p-1.5 hover:bg-gray-100 rounded-lg"><FileText className="w-4 h-4 text-gray-500"/></button>
+                <button className="p-1.5 hover:bg-gray-100 rounded-lg"><ArrowUpRight className="w-4 h-4 text-gray-500"/></button>
+              </div>
+            </div>
+
+            <div className="flex-1 flex flex-col gap-4 overflow-y-auto mb-4 no-scrollbar">
+              <div className="self-end bg-gray-100 text-gray-900 rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm max-w-[85%]">
+                What areas should I prioritize for my outreach today?
+              </div>
+              <div className="self-start flex gap-3 max-w-[90%]">
+                <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center shrink-0 mt-1">
+                  <Sparkles className="w-3 h-3 text-white" />
+                </div>
+                <div className="bg-blue-50 border border-blue-100 text-blue-900 rounded-2xl rounded-tl-sm px-4 py-3 text-sm">
+                  <p className="font-semibold mb-1 flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-blue-600"/> Outreach Focus:</p>
+                  <p className="text-blue-800">Prioritize: High fit companies in the manufacturing sector. You have 45 pending follow-ups there.</p>
+                  <p className="text-blue-600 mt-2 text-xs">Avoid: Sending generic templates to enterprise leads.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-auto">
+              <div className="flex gap-2 mb-3 overflow-x-auto no-scrollbar pb-1">
+                <span className="text-[10px] font-medium text-gray-500 bg-gray-50 border border-gray-200 px-2 py-1 rounded-full whitespace-nowrap cursor-pointer hover:bg-gray-100">AI Hub</span>
+                <span className="text-[10px] font-medium text-gray-500 bg-gray-50 border border-gray-200 px-2 py-1 rounded-full whitespace-nowrap cursor-pointer hover:bg-gray-100">Prospects</span>
+                <span className="text-[10px] font-medium text-gray-500 bg-gray-50 border border-gray-200 px-2 py-1 rounded-full whitespace-nowrap cursor-pointer hover:bg-gray-100">Templates</span>
+              </div>
+              <div className="relative flex items-center">
+                <div className="absolute left-2 w-7 h-7 bg-blue-100 rounded-full flex items-center justify-center">
+                  <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+                </div>
+                <input 
+                  type="text" 
+                  placeholder="Ask or Search..." 
+                  className="w-full bg-gray-50 border border-gray-200 rounded-full py-2.5 pl-11 pr-20 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                <div className="absolute right-2 flex items-center gap-1">
+                  <button className="p-1.5 text-gray-400 hover:text-gray-600"><Headphones className="w-4 h-4"/></button>
+                  <button className="w-7 h-7 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 shadow-sm transition-colors">
+                    <Send className="w-3 h-3" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/EmailTemplates.tsx">
+import React, { useState } from 'react';
+import { Search, MoreVertical, Send, Eye } from 'lucide-react';
+
+export default function EmailTemplates() {
+  const [activeTab, setActiveTab] = useState('My Templates');
+
+  const templates = [
+    { id: 1, title: 'First Follow-up', subject: 'A gentle reminder', sent: 0, viewed: 0, owner: 'Tanay' },
+    { id: 2, title: 'Second Follow-up', subject: 'I look forward to your reply', sent: 0, viewed: 0, owner: 'Tanay' },
+    { id: 3, title: 'Third Follow-up', subject: 'I hope I am not bugging you', sent: 0, viewed: 0, owner: 'Tanay' },
+  ];
+
+  return (
+    <div className="flex-1 flex flex-col h-full bg-white">
+      {/* Header */}
+      <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+        <h1 className="text-xl font-semibold text-gray-900">Templates</h1>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 p-6 overflow-auto bg-[#F9FAFB]">
+        <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
+          {/* Toolbar */}
+          <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+            <div className="flex bg-gray-100 p-1 rounded-md">
+              <button 
+                onClick={() => setActiveTab('My Templates')}
+                className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${activeTab === 'My Templates' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+              >
+                My Templates
+              </button>
+              <button 
+                onClick={() => setActiveTab('Team Templates')}
+                className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${activeTab === 'Team Templates' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+              >
+                Team Templates
+              </button>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input 
+                  type="text" 
+                  placeholder="Search" 
+                  className="pl-9 pr-4 py-2 border border-gray-200 rounded-md text-sm w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                New Template
+              </button>
+            </div>
+          </div>
+
+          {/* Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-gray-200 bg-gray-50">
+                  <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <div className="flex items-center gap-1 cursor-pointer hover:text-gray-700">
+                      Title
+                      <span className="text-[10px]">↑↓</span>
+                    </div>
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
+                  <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Performance</th>
+                  <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <div className="flex items-center gap-1 cursor-pointer hover:text-gray-700">
+                      Owner
+                      <span className="text-[10px]">↑↓</span>
+                    </div>
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {templates.map((template) => (
+                  <tr key={template.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-6 py-4 text-sm text-gray-900">{template.title}</td>
+                    <td className="px-6 py-4 text-sm text-gray-500">{template.subject}</td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1.5" title="Sent">
+                          <Send className="w-4 h-4 text-gray-400" />
+                          <span>{template.sent}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5" title="Viewed">
+                          <Eye className="w-4 h-4 text-gray-400" />
+                          <span>{template.viewed}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-500">{template.owner}</td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      <button className="p-1 hover:bg-gray-200 rounded-md transition-colors text-gray-400 hover:text-gray-600">
+                        <MoreVertical className="w-4 h-4" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/FollowUps.tsx">
+import React from 'react';
+import { Search, Filter, RefreshCw, Download, MoreVertical, ChevronRight, Activity, GitBranch } from 'lucide-react';
+
+const emailsData = [
+  {
+    id: 1,
+    prospectName: 'Richard Nolan',
+    prospectEmail: 'richard.nolan1043@long.com',
+    step: 'Step 3',
+    variant: 'A',
+    status: 'Sent',
+    date: 'Thu, Sep 07, 2023 06:26 PM',
+    opened: 1,
+    clicked: 0,
+    replied: '-',
+    senderName: 'Demo User',
+    senderEmail: 'demouser92@gmail.com'
+  },
+  {
+    id: 2,
+    prospectName: 'Diane Evans',
+    prospectEmail: 'diane.evans1048@garcia-aguilar...',
+    step: 'Step 1',
+    variant: 'B',
+    status: 'Sent',
+    date: 'Thu, Sep 07, 2023 06:14 PM',
+    opened: 1,
+    clicked: 0,
+    replied: '-',
+    senderName: 'Demo User',
+    senderEmail: 'demouser87@gmail.com'
+  },
+  {
+    id: 3,
+    prospectName: 'Richard Greene',
+    prospectEmail: 'richard.greene1039@pace.net',
+    step: 'Step 2',
+    variant: 'A',
+    status: 'Sent',
+    date: 'Thu, Sep 07, 2023 06:14 PM',
+    opened: 1,
+    clicked: 0,
+    replied: '-',
+    senderName: 'Demo User',
+    senderEmail: 'demouser70@gmail.com'
+  },
+  {
+    id: 4,
+    prospectName: 'Suzanne Young',
+    prospectEmail: 'suzanne.young1040@lopez.com',
+    step: 'Step 2',
+    variant: 'A',
+    status: 'Sent',
+    date: 'Thu, Sep 07, 2023 06:12 PM',
+    opened: 1,
+    clicked: 0,
+    replied: '-',
+    senderName: 'Demo User',
+    senderEmail: 'demouser90@gmail.com'
+  },
+  {
+    id: 5,
+    prospectName: 'Erin Torres',
+    prospectEmail: 'erin.torres1046@west.info',
+    step: 'Step 1',
+    variant: 'B',
+    status: 'Sent',
+    date: 'Thu, Sep 07, 2023 06:09 PM',
+    opened: 1,
+    clicked: 0,
+    replied: '-',
+    senderName: 'Demo User',
+    senderEmail: 'demouser98@gmail.com'
+  }
+];
+
+const stats = [
+  { label: 'Total', value: '13388', subtext: '' },
+  { label: 'Scheduled', value: '2416', subtext: '' },
+  { label: 'Delivered', value: '10972', subtext: '' },
+  { label: 'Opened', value: '4396', subtext: '(40.07%)', active: true },
+  { label: 'Clicked', value: '0', subtext: '(0%)' },
+  { label: 'Replied', value: '557', subtext: '(5.08%)' },
+  { label: 'Bounced', value: '0', subtext: '(0%)' },
+  { label: 'Failed', value: '0', subtext: '(0%)' },
+];
+
+const steps = [
+  { label: 'All Steps', count: '4396', active: true },
+  { label: 'Step 1', count: '2163' },
+  { label: 'Step 2', count: '1457' },
+  { label: 'Step 3', count: '776' },
+];
+
+export default function FollowUps() {
+  return (
+    <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-gray-50 h-full">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-sm">
+            <span className="text-gray-500 font-medium">Sequence</span>
+            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <span className="font-semibold text-gray-900 text-lg">Saas Founder Outreach</span>
+            <div className="ml-2 w-10 h-5 bg-green-500 rounded-full flex items-center px-1 cursor-pointer">
+              <div className="w-3 h-3 bg-white rounded-full ml-auto"></div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 text-sm text-gray-600 border border-yellow-400 rounded-full px-3 py-1 bg-yellow-50">
+              <span className="font-bold text-yellow-600">56</span>
+              <span>Sequence Score</span>
+            </div>
+          </div>
+        </div>
+        
+        {/* Tabs */}
+        <div className="px-6 flex items-center gap-6 text-sm">
+          <button className="py-3 text-gray-500 hover:text-gray-900 font-medium">Steps <span className="ml-1 bg-gray-100 px-2 py-0.5 rounded text-xs">3</span></button>
+          <button className="py-3 text-gray-500 hover:text-gray-900 font-medium">Prospects <span className="ml-1 bg-gray-100 px-2 py-0.5 rounded text-xs">5490</span></button>
+          <button className="py-3 text-blue-600 border-b-2 border-blue-600 font-medium">Emails</button>
+          <button className="py-3 text-gray-500 hover:text-gray-900 font-medium">Settings</button>
+          <button className="py-3 text-gray-500 hover:text-gray-900 font-medium flex items-center gap-1">
+            <GitBranch className="w-4 h-4" /> Subsequence <span className="ml-1 bg-gray-100 px-2 py-0.5 rounded text-xs">1</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 overflow-auto">
+        <div className="p-6 max-w-[1400px] mx-auto">
+          {/* Toolbar */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input 
+                  type="text" 
+                  placeholder="Search" 
+                  className="pl-9 pr-4 py-2 border border-gray-300 rounded-md text-sm w-64 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+              </div>
+              <button className="p-2 text-gray-500 hover:bg-gray-100 rounded-md border border-transparent hover:border-gray-200">
+                <Filter className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="flex items-center gap-2">
+              <button className="p-2 text-gray-500 hover:bg-gray-100 rounded-md">
+                <Activity className="w-4 h-4" />
+              </button>
+              <button className="p-2 text-gray-500 hover:bg-gray-100 rounded-md">
+                <RefreshCw className="w-4 h-4" />
+              </button>
+              <button className="p-2 text-gray-500 hover:bg-gray-100 rounded-md">
+                <Download className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Stats Cards */}
+          <div className="flex items-center justify-between mb-6 bg-white border border-gray-200 rounded-lg p-1 shadow-sm">
+            {stats.map((stat, idx) => (
+              <div 
+                key={idx} 
+                className={`flex flex-col items-center justify-center px-4 py-3 rounded-md flex-1 cursor-pointer ${stat.active ? 'bg-white border border-gray-200 shadow-sm' : 'hover:bg-gray-50 border border-transparent'}`}
+              >
+                <div className="flex items-baseline gap-1">
+                  <span className={`text-xl font-semibold ${stat.active ? 'text-gray-900' : 'text-gray-900'}`}>{stat.value}</span>
+                  {stat.subtext && <span className="text-xs text-gray-500 font-medium">{stat.subtext}</span>}
+                </div>
+                <span className="text-xs text-gray-600 mt-1 font-medium">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Split View: Sidebar + Table */}
+          <div className="flex bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+            {/* Left Sidebar (Steps) */}
+            <div className="w-32 border-r border-gray-200 bg-white flex flex-col">
+              {steps.map((step, idx) => (
+                <div 
+                  key={idx} 
+                  className={`flex flex-col items-center justify-center py-5 border-b border-gray-100 cursor-pointer relative ${step.active ? 'bg-white' : 'hover:bg-gray-50'}`}
+                >
+                  {step.active && <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-600"></div>}
+                  <span className={`text-xl font-semibold ${step.active ? 'text-blue-600' : 'text-gray-900'}`}>{step.count}</span>
+                  <span className={`text-xs mt-1 font-medium ${step.active ? 'text-blue-600' : 'text-gray-500'}`}>{step.label}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Table */}
+            <div className="flex-1 overflow-x-auto">
+              <table className="w-full text-sm text-left whitespace-nowrap">
+                <thead className="text-xs text-gray-500 bg-white border-b border-gray-200">
+                  <tr>
+                    <th className="px-6 py-4 font-medium">Prospect</th>
+                    <th className="px-6 py-4 font-medium">Step</th>
+                    <th className="px-6 py-4 font-medium">Scheduled/Sent</th>
+                    <th className="px-6 py-4 font-medium">Opened <span className="text-[10px] ml-1">↑↓</span></th>
+                    <th className="px-6 py-4 font-medium">Clicked <span className="text-[10px] ml-1">↑↓</span></th>
+                    <th className="px-6 py-4 font-medium">Replied</th>
+                    <th className="px-6 py-4 font-medium">Sender Email</th>
+                    <th className="px-6 py-4 font-medium text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {emailsData.map((email) => (
+                    <tr key={email.id} className="hover:bg-gray-50/50">
+                      <td className="px-6 py-4">
+                        <div className="font-medium text-gray-900">{email.prospectName}</div>
+                        <div className="text-gray-500 text-xs mt-0.5">{email.prospectEmail}</div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-gray-900">{email.step}</div>
+                        <div className={`inline-flex items-center justify-center w-5 h-5 rounded text-xs font-medium mt-1 ${email.variant === 'A' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'}`}>
+                          {email.variant}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-gray-900">{email.status}</div>
+                        <div className="text-gray-500 text-xs mt-0.5">{email.date}</div>
+                      </td>
+                      <td className="px-6 py-4 text-gray-900">{email.opened}</td>
+                      <td className="px-6 py-4 text-gray-900">{email.clicked}</td>
+                      <td className="px-6 py-4 text-gray-900">{email.replied}</td>
+                      <td className="px-6 py-4">
+                        <div className="font-medium text-gray-900">{email.senderName}</div>
+                        <div className="text-gray-500 text-xs mt-0.5">{email.senderEmail}</div>
+                      </td>
+                      <td className="px-6 py-4 text-center">
+                        <button className="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100">
+                          <MoreVertical className="w-4 h-4" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/Help.tsx">
+import React from 'react';
+
+export default function Help() {
+  return (
+    <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-white h-full">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h1 className="text-xl font-semibold text-gray-900">Help</h1>
+      </div>
+      <div className="p-6 flex-1 overflow-y-auto">
+        <p className="text-gray-500">Help page content will go here.</p>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/Inbox.tsx">
+import React from 'react';
+
+export default function Inbox() {
+  return (
+    <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-white h-full">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h1 className="text-xl font-semibold text-gray-900">Inbox (Unified Inbox)</h1>
+      </div>
+      <div className="p-6 flex-1 overflow-y-auto">
+        <p className="text-gray-500">Inbox page content will go here.</p>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/PipelineRunner.tsx">
+import React from 'react';
+import { 
+  Search, Users, ChevronDown, Play, Pause, 
+  MoreVertical, Info, Sparkles, Mail, Inbox, CornerUpLeft
+} from 'lucide-react';
+
+export default function PipelineRunner() {
+  return (
+    <div className="flex-1 overflow-auto p-6 bg-[#F9FAFB] h-full">
+      {/* Filters & Actions */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input 
+              type="text" 
+              placeholder="Search here..." 
+              className="pl-9 pr-4 py-2 border border-gray-200 rounded-md text-sm w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+            />
+          </div>
+          
+          <button className="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50">
+            <Users className="w-4 h-4 text-gray-400" />
+            Client Associated
+            <ChevronDown className="w-4 h-4 text-gray-400" />
+          </button>
+
+          <button className="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50">
+            <Users className="w-4 h-4 text-gray-400" />
+            Sequence Owner
+            <ChevronDown className="w-4 h-4 text-gray-400" />
+          </button>
+
+          <button className="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50">
+            Status (All)
+            <ChevronDown className="w-4 h-4 text-gray-400" />
+          </button>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button className="p-2 text-gray-300 cursor-not-allowed">
+            <Pause className="w-5 h-5" />
+          </button>
+          <button className="p-2 text-gray-300 cursor-not-allowed">
+            <Play className="w-5 h-5" />
+          </button>
+          
+          <button className="flex items-center gap-2 px-4 py-2 border border-purple-200 text-purple-700 bg-white rounded-md text-sm font-medium hover:bg-purple-50 transition-colors">
+            <Sparkles className="w-4 h-4 text-purple-500" />
+            Write With AI
+          </button>
+
+          <button className="flex items-center gap-2 px-4 py-2 bg-[#2563eb] text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-colors">
+            Create Sequence
+          </button>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <table className="w-full text-left text-sm">
+          <thead className="bg-gray-50 border-b border-gray-200 text-gray-600 font-medium">
+            <tr>
+              <th className="px-4 py-3 w-12 text-center">
+                <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+              </th>
+              <th className="px-4 py-3">Sequence Name</th>
+              <th className="px-4 py-3">
+                <div className="flex items-center gap-1">
+                  Sequence Progress
+                  <Info className="w-3.5 h-3.5 text-gray-400" />
+                </div>
+              </th>
+              <th className="px-4 py-3">Score</th>
+              <th className="px-4 py-3">
+                <div className="flex items-center gap-1.5">
+                  <Users className="w-4 h-4 text-purple-500" />
+                  Prospect
+                </div>
+              </th>
+              <th className="px-4 py-3">
+                <div className="flex items-center gap-1.5">
+                  <Mail className="w-4 h-4 text-blue-500" />
+                  Contacted
+                </div>
+              </th>
+              <th className="px-4 py-3">
+                <div className="flex items-center gap-1.5">
+                  <Inbox className="w-4 h-4 text-indigo-500" />
+                  Opened
+                </div>
+              </th>
+              <th className="px-4 py-3">
+                <div className="flex items-center gap-1.5">
+                  <CornerUpLeft className="w-4 h-4 text-green-500" />
+                  Replied
+                </div>
+              </th>
+              <th className="px-4 py-3 w-12"></th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {/* Row 1 */}
+            <tr className="hover:bg-gray-50 group">
+              <td className="px-4 py-4 text-center">
+                <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+              </td>
+              <td className="px-4 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" className="sr-only peer" />
+                    <div className="w-8 h-4 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-blue-600"></div>
+                  </div>
+                  <div>
+                    <div className="font-medium text-gray-900 mb-1">Aarkay Techno Consultants Pvt. Ltd.'s Le...</div>
+                    <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                      <div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
+                      Draft
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td className="px-4 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center text-[10px] text-gray-400 font-medium">
+                    0%
+                  </div>
+                  <span className="text-gray-900 font-medium">0<span className="text-gray-400 font-normal">/1</span></span>
+                </div>
+              </td>
+              <td className="px-4 py-4">
+                <div className="w-8 h-8 rounded-full border border-yellow-400 flex items-center justify-center text-xs text-yellow-600 font-medium">
+                  45
+                </div>
+              </td>
+              <td className="px-4 py-4">
+                <span className="font-medium text-gray-900 border-b border-dashed border-gray-400 pb-0.5">1</span>
+              </td>
+              <td className="px-4 py-4 text-gray-900 font-medium">-</td>
+              <td className="px-4 py-4 text-gray-900 font-medium">-</td>
+              <td className="px-4 py-4 text-gray-900 font-medium">-</td>
+              <td className="px-4 py-4 text-right">
+                <button className="p-1 text-gray-400 hover:text-gray-600 rounded">
+                  <MoreVertical className="w-5 h-5" />
+                </button>
+              </td>
+            </tr>
+
+            {/* Row 2 */}
+            <tr className="hover:bg-gray-50 group">
+              <td className="px-4 py-4 text-center">
+                <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+              </td>
+              <td className="px-4 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" className="sr-only peer" />
+                    <div className="w-8 h-4 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-blue-600"></div>
+                  </div>
+                  <div>
+                    <div className="font-medium text-gray-900 mb-1">Tanay's First Sequence. 🚀</div>
+                    <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                      <div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
+                      Draft
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td className="px-4 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center text-[10px] text-gray-400 font-medium">
+                    0%
+                  </div>
+                  <span className="text-gray-900 font-medium">0<span className="text-gray-400 font-normal">/3</span></span>
+                </div>
+              </td>
+              <td className="px-4 py-4">
+                <div className="w-8 h-8 rounded-full border border-yellow-400 flex items-center justify-center text-xs text-yellow-600 font-medium">
+                  46
+                </div>
+              </td>
+              <td className="px-4 py-4">
+                <span className="font-medium text-gray-900 border-b border-dashed border-gray-400 pb-0.5">3</span>
+              </td>
+              <td className="px-4 py-4 text-gray-900 font-medium">-</td>
+              <td className="px-4 py-4 text-gray-900 font-medium">-</td>
+              <td className="px-4 py-4 text-gray-900 font-medium">-</td>
+              <td className="px-4 py-4 text-right">
+                <button className="p-1 text-gray-400 hover:text-gray-600 rounded">
+                  <MoreVertical className="w-5 h-5" />
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/Prospects.tsx">
+import React from 'react';
+import { 
+  Search, Filter, Send, Tag, X, CornerUpLeft, Ban, Flag, Pause, Play, 
+  RefreshCw, Download, CheckCircle2, ChevronDown, Mail, Eye, MousePointerClick,
+  ThumbsUp, Calendar, DollarSign, Briefcase, GitBranch
+} from 'lucide-react';
+
+export default function Prospects() {
+  return (
+    <div className="flex flex-col h-full bg-white rounded-lg border border-gray-200 overflow-hidden">
+      {/* Secondary Navigation */}
+      <div className="flex items-center justify-between px-6 pt-3 border-b border-gray-200">
+        <div className="flex items-center gap-6 text-sm font-medium text-gray-500">
+          <button className="flex items-center gap-2 hover:text-gray-900 pb-3">
+            <CheckCircle2 className="w-4 h-4 text-blue-600" />
+            Steps
+            <ChevronDown className="w-4 h-4" />
+          </button>
+          <button className="flex items-center gap-2 text-blue-600 border-b-2 border-blue-600 pb-3">
+            <CheckCircle2 className="w-4 h-4" />
+            Prospects
+            <ChevronDown className="w-4 h-4" />
+          </button>
+          <button className="flex items-center gap-2 hover:text-gray-900 pb-3">
+            <div className="w-4 h-4 rounded-full border-2 border-gray-300" />
+            Settings
+          </button>
+          <button className="flex items-center gap-2 hover:text-gray-900 pb-3">
+            <GitBranch className="w-4 h-4" />
+            Subsequence
+          </button>
+        </div>
+        <div className="flex items-center gap-4 pb-3">
+          <div className="flex items-center gap-2 text-sm font-medium">
+            <div className="w-8 h-8 rounded-full border border-red-200 flex items-center justify-center text-red-500 bg-white">
+              46
+            </div>
+            <span className="text-gray-600">Sequence Score</span>
+          </div>
+          <button className="flex items-center gap-2 bg-[#004EEB] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
+            Add Prospects
+            <ChevronDown className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      {/* Toolbar */}
+      <div className="flex items-center justify-between px-6 py-3 border-b border-gray-200 bg-gray-50/50">
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input 
+              type="text" 
+              placeholder="Search" 
+              className="pl-9 pr-4 py-1.5 border border-gray-200 rounded-md text-sm w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+            />
+          </div>
+          <div className="h-6 w-px bg-gray-200"></div>
+          <div className="flex items-center gap-1 text-gray-500">
+            <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600"><Filter className="w-4 h-4" /></button>
+            <div className="h-6 w-px bg-gray-200 mx-1"></div>
+            <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600"><Send className="w-4 h-4" /></button>
+            <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600"><Tag className="w-4 h-4" /></button>
+            <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600"><X className="w-4 h-4" /></button>
+            <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600"><CornerUpLeft className="w-4 h-4" /></button>
+            <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600"><Ban className="w-4 h-4" /></button>
+            <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600"><Flag className="w-4 h-4" /></button>
+            <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600"><Pause className="w-4 h-4" /></button>
+            <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600"><Play className="w-4 h-4" /></button>
+          </div>
+        </div>
+        <div className="flex items-center gap-1 text-gray-500">
+          <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600"><RefreshCw className="w-4 h-4" /></button>
+          <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600"><Download className="w-4 h-4" /></button>
+        </div>
+      </div>
+
+      {/* Stats Tabs */}
+      <div className="flex items-center px-6 py-4 border-b border-gray-200 overflow-x-auto no-scrollbar gap-2">
+        <div className="flex flex-col items-center justify-center px-6 py-2 bg-white border border-gray-200 shadow-sm rounded-lg min-w-[100px]">
+          <span className="text-2xl font-semibold text-gray-900">3</span>
+          <span className="text-xs text-gray-600 font-medium">Total</span>
+        </div>
+        
+        <div className="flex flex-col items-center justify-center px-6 py-2 min-w-[120px] cursor-pointer hover:bg-gray-50 rounded-lg">
+          <span className="text-2xl font-semibold text-gray-900">0</span>
+          <span className="text-xs text-gray-600 font-medium flex items-center gap-1">Not Contacted <ChevronDown className="w-3 h-3" /></span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center px-6 py-2 min-w-[100px] cursor-pointer hover:bg-gray-50 rounded-lg">
+          <span className="text-2xl font-semibold text-gray-900">0</span>
+          <span className="text-xs text-gray-600 font-medium">Contacted</span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center px-6 py-2 min-w-[100px] cursor-pointer hover:bg-gray-50 rounded-lg">
+          <span className="text-2xl font-semibold text-gray-900">0</span>
+          <span className="text-xs text-gray-600 font-medium">Opened</span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center px-6 py-2 min-w-[100px] cursor-pointer hover:bg-gray-50 rounded-lg">
+          <span className="text-2xl font-semibold text-gray-900">0</span>
+          <span className="text-xs text-gray-600 font-medium">Replied</span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center px-6 py-2 min-w-[100px] cursor-pointer hover:bg-gray-50 rounded-lg">
+          <span className="text-2xl font-semibold text-gray-900">0</span>
+          <span className="text-xs text-gray-600 font-medium flex items-center gap-1">Clicked <ChevronDown className="w-3 h-3" /></span>
+        </div>
+
+        <div className="w-px h-10 bg-gray-200 mx-2"></div>
+
+        <div className="flex flex-col items-center justify-center px-6 py-2 min-w-[100px] cursor-pointer hover:bg-gray-50 rounded-lg">
+          <span className="text-2xl font-semibold text-gray-900">0 <span className="text-sm text-gray-400 font-normal">$0</span></span>
+          <span className="text-xs text-gray-600 font-medium flex items-center gap-1"><ThumbsUp className="w-3 h-3 text-gray-400" /> Interested</span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center px-6 py-2 min-w-[120px] cursor-pointer hover:bg-gray-50 rounded-lg">
+          <span className="text-2xl font-semibold text-gray-900">0 <span className="text-sm text-gray-400 font-normal">$0</span></span>
+          <span className="text-xs text-gray-600 font-medium flex items-center gap-1"><Calendar className="w-3 h-3 text-gray-400" /> Meeting Booked</span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center px-6 py-2 min-w-[100px] cursor-pointer hover:bg-gray-50 rounded-lg">
+          <span className="text-2xl font-semibold text-gray-900">0 <span className="text-sm text-gray-400 font-normal">$0</span></span>
+          <span className="text-xs text-gray-600 font-medium flex items-center gap-1"><DollarSign className="w-3 h-3 text-gray-400" /> Closed</span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center px-6 py-2 min-w-[120px] cursor-pointer hover:bg-gray-50 rounded-lg">
+          <span className="text-2xl font-semibold text-gray-900">0</span>
+          <span className="text-xs text-gray-600 font-medium flex items-center gap-1"><Briefcase className="w-3 h-3 text-gray-400" /> Out of Office <ChevronDown className="w-3 h-3" /></span>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="flex-1 overflow-auto">
+        <table className="w-full text-left text-sm">
+          <thead className="bg-gray-50 border-b border-gray-200 text-gray-600 font-medium sticky top-0 z-10">
+            <tr>
+              <th className="px-6 py-3 w-12">
+                <input type="checkbox" className="rounded border-gray-300" />
+              </th>
+              <th className="px-4 py-3">Name</th>
+              <th className="px-4 py-3">Current Step</th>
+              <th className="px-4 py-3">Current step stats</th>
+              <th className="px-4 py-3">Outcome</th>
+              <th className="px-4 py-3">Tags</th>
+              <th className="px-4 py-3">Last activity</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {[
+              { name: 'Malav Joshi', email: 'malav@saleshandy.com' },
+              { name: 'Piyush Patel', email: 'piyush@saleshandy.com' },
+              { name: 'Anil Salvi', email: 'anil@saleshandy.com' }
+            ].map((person, idx) => (
+              <tr key={idx} className="hover:bg-gray-50 group">
+                <td className="px-6 py-4">
+                  <input type="checkbox" className="rounded border-gray-300" />
+                </td>
+                <td className="px-4 py-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-medium text-gray-900">{person.name}</span>
+                    <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full border border-gray-200">Inactive</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-gray-500 text-xs">
+                    {person.email}
+                    <CheckCircle2 className="w-3 h-3 text-gray-300 fill-gray-100" />
+                  </div>
+                </td>
+                <td className="px-4 py-4">
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <Mail className="w-4 h-4 text-blue-500" />
+                    Step 1
+                  </div>
+                </td>
+                <td className="px-4 py-4">
+                  <div className="flex items-center gap-3 text-gray-400">
+                    <Send className="w-4 h-4" />
+                    <Eye className="w-4 h-4" />
+                    <MousePointerClick className="w-4 h-4" />
+                    <CornerUpLeft className="w-4 h-4" />
+                  </div>
+                </td>
+                <td className="px-4 py-4">
+                  <button className="flex items-center gap-2 px-3 py-1.5 border border-gray-200 rounded-full text-sm text-gray-700 hover:bg-gray-50 bg-white">
+                    Add Outcome
+                    <ChevronDown className="w-3 h-3 text-gray-400" />
+                  </button>
+                </td>
+                <td className="px-4 py-4 text-gray-500">-</td>
+                <td className="px-4 py-4 text-gray-500">18 hours ago</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/Settings.tsx">
+import React from 'react';
+
+export default function Settings() {
+  return (
+    <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-white h-full">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h1 className="text-xl font-semibold text-gray-900">Settings</h1>
+      </div>
+      <div className="p-6 flex-1 overflow-y-auto">
+        <p className="text-gray-500">Settings page content will go here.</p>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/Dashboard.tsx">
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { 
+  Search, Users, Settings, Bell, ChevronDown, Play, Pause, 
+  MoreVertical, Info, Zap, Headphones, Mail, CheckSquare, 
+  Briefcase, Shield, FileText, BarChart2, MessageSquare, 
+  Send, Inbox, Sparkles, Plus, MoreHorizontal, Edit3, LayoutDashboard
+} from 'lucide-react';
+
+const SidebarSection = ({ label }) => (
+  <div className="px-3 py-2 mt-2 text-xs font-semibold text-gray-400 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+    {label}
+  </div>
+);
+
+const SidebarItem = ({ icon: Icon, label, to = "#", badge = null, hasDropdown = false }) => {
+  const location = useLocation();
+  const active = location.pathname === to || (to !== "#" && location.pathname.startsWith(to));
+
+  return (
+    <Link to={to} className={`flex items-center w-full px-3 py-2 rounded-lg whitespace-nowrap transition-colors ${active ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-100'}`}>
+      <Icon className="w-5 h-5 shrink-0" />
+      <div className="flex items-center justify-between overflow-hidden transition-all duration-300 max-w-0 group-hover:max-w-[200px] group-hover:ml-3 opacity-0 group-hover:opacity-100 flex-1">
+        <span className="font-medium text-[14px] text-left">{label}</span>
+        <div className="flex items-center gap-2">
+          {badge && (
+            <span className="bg-yellow-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+              {badge}
+            </span>
+          )}
+          {hasDropdown && (
+            <ChevronDown className="w-4 h-4" />
+          )}
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default function Dashboard({ children }: { children?: React.ReactNode }) {
+  return (
+    <div className="flex h-screen bg-[#F9FAFB] font-['Inter',sans-serif]">
+      {/* Sidebar */}
+      <aside className="h-screen w-[60px] hover:w-[240px] bg-white border-r border-gray-200 flex flex-col py-4 transition-all duration-300 overflow-hidden group shrink-0">
+        <div className="mb-6 px-4 flex items-center overflow-hidden whitespace-nowrap h-8">
+          <img 
+            src="https://www.atcgroup.co.in/assets/aarkay-logo-Cmuxygmp.png" 
+            alt="Aarkay Logo" 
+            className="h-8 w-auto object-contain" 
+            referrerPolicy="no-referrer" 
+          />
+        </div>
+
+        <div className="flex flex-col gap-1 w-full px-2 flex-1 overflow-y-auto no-scrollbar">
+          <SidebarSection label="Main" />
+          <SidebarItem icon={LayoutDashboard} label="Dashboard" to="/dashboard" />
+          <SidebarItem icon={Search} label="Pipeline Runner (Lead Finder)" to="/pipeline-runner" />
+          <SidebarItem icon={Briefcase} label="Prospects (Client Management)" to="/prospects" />
+
+          <SidebarSection label="Outreach" />
+          <SidebarItem icon={Send} label="Campaigns (Sequences)" to="/campaigns" />
+          <SidebarItem icon={CheckSquare} label="Follow Ups (Tasks)" to="/follow-ups" />
+          <SidebarItem icon={Inbox} label="Inbox (Unified Inbox)" to="/inbox" />
+
+          <SidebarSection label="Tools" />
+          <SidebarItem icon={FileText} label="Email Templates" to="/email-templates" />
+          <SidebarItem icon={BarChart2} label="Analytics" to="/analytics" />
+          <SidebarItem icon={Users} label="CRM" to="/crm" />
+        </div>
+
+        <div className="flex flex-col gap-1 w-full px-2 mt-auto pt-4 border-t border-gray-200">
+          <SidebarSection label="System" />
+          <SidebarItem icon={Settings} label="Settings" to="/settings" />
+          <SidebarItem icon={MessageSquare} label="Help" to="/help" />
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Top Header */}
+        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0">
+          <div className="flex items-center gap-2">
+            <img 
+              src="https://www.atcgroup.co.in/assets/aarkay-logo-Cmuxygmp.png" 
+              alt="Aarkay Logo" 
+              className="h-8 w-auto object-contain" 
+              referrerPolicy="no-referrer" 
+            />
+          </div>
+
+          <div className="flex items-center gap-6">
+            {/* Icons */}
+            <div className="flex items-center gap-4 text-gray-500">
+              <button className="hover:text-gray-900"><Headphones className="w-5 h-5" /></button>
+              <button className="hover:text-gray-900 relative">
+                <Zap className="w-5 h-5" />
+                <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full border-2 border-white">3</span>
+              </button>
+              <button className="hover:text-gray-900"><Bell className="w-5 h-5" /></button>
+            </div>
+
+            {/* User Profile */}
+            <button className="flex items-center gap-2 hover:bg-gray-50 p-1 rounded-md">
+              <div className="w-8 h-8 bg-blue-100 text-blue-600 font-semibold rounded-full flex items-center justify-center text-sm">
+                TB
+              </div>
+              <ChevronDown className="w-4 h-4 text-gray-500" />
+            </button>
+          </div>
+        </header>
+
+        {/* Content Area */}
+        {children || (
+          <div className="flex-1 overflow-auto p-6 flex flex-col items-center justify-center text-center">
+            <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-4">
+              <LayoutDashboard className="w-8 h-8" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome to Aarkay Dashboard</h1>
+            <p className="text-gray-500 max-w-md">
+              Select an option from the sidebar to get started. Try navigating to Pipeline Runner or Email Templates.
+            </p>
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
+</file>
+
+<file path="src/index.css">
+@import "tailwindcss";
+</file>
+
+<file path="src/main.tsx">
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  }
+}
+</file>
+
+<file path="vite.config.ts">
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import {defineConfig, loadEnv} from 'vite';
+
+export default defineConfig(({mode}) => {
+  const env = loadEnv(mode, '.', '');
+  return {
+    plugins: [react(), tailwindcss()],
+    define: {
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '.'),
+      },
+    },
+    server: {
+      // HMR is disabled in AI Studio via DISABLE_HMR env var.
+      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
+      hmr: process.env.DISABLE_HMR !== 'true',
+    },
+  };
+});
+</file>
+
+<file path="package.json">
+{
+  "name": "react-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf dist",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^1.29.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.13.2",
+    "recharts": "^3.8.1",
+    "vite": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.14.0",
+    "autoprefixer": "^10.4.21",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}
+</file>
+
+<file path="README.md">
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
+
+# Run and deploy your AI Studio app
+
+This contains everything you need to run your app locally.
+
+View your app in AI Studio: https://ai.studio/apps/8faccf8c-cfd8-44dd-bfdd-b5e194424d8c
+
+## Run Locally
+
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
+</file>
+
+<file path="src/App.tsx">
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { ChevronDown, Lock, ArrowRight, Star, ShieldCheck, Shield } from 'lucide-react';
+import Dashboard from './Dashboard';
+import DashboardHome from './components/DashboardHome';
+import EmailTemplates from './components/EmailTemplates';
+import PipelineRunner from './components/PipelineRunner';
+import Prospects from './components/Prospects';
+import Campaigns from './components/Campaigns';
+import FollowUps from './components/FollowUps';
+import Inbox from './components/Inbox';
+import Analytics from './components/Analytics';
+import CRM from './components/CRM';
+import Settings from './components/Settings';
+import Help from './components/Help';
+
+function Home() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="min-h-screen bg-white font-['Inter',sans-serif] text-gray-900">
+      {/* Navbar */}
+      <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-12">
+          {/* Logo */}
+          <img 
+            src="https://www.atcgroup.co.in/assets/aarkay-logo-Cmuxygmp.png" 
+            alt="Aarkay Logo" 
+            className="h-8 cursor-pointer" 
+            referrerPolicy="no-referrer" 
+          />
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={() => navigate('/dashboard')}
+            className="text-[15px] font-medium text-white bg-[#2563eb] rounded-md px-5 py-2 hover:bg-blue-700 transition-colors"
+          >
+            Get Started
+          </button>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <main className="flex flex-col items-center justify-center pt-24 pb-16 px-4 text-center max-w-4xl mx-auto">
+        <p className="font-['Caveat',cursive] text-[32px] text-gray-400 mb-4 tracking-wide">
+          your only sales automation software
+        </p>
+        
+        <h1 className="text-[56px] md:text-[72px] font-extrabold tracking-tight text-gray-900 leading-[1.1] mb-12">
+          Send cold emails.<br />
+          Take <span className="relative inline-block">
+            <span className="relative z-10">follow up</span>
+            <span className="absolute bottom-2 left-[-2%] w-[104%] h-5 bg-[#fef08a] -z-10 rounded-sm"></span>
+          </span> every day.
+        </h1>
+      </main>
+
+      {/* Social Proof Section */}
+      <section className="max-w-5xl mx-auto px-4 pb-24 text-center">
+        <p className="text-[17px] text-gray-600 mb-10">
+          Trusted by <span className="font-bold text-gray-900">10,000+</span> businesses, agencies, and sales teams worldwide.
+        </p>
+
+        {/* Ratings */}
+        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 mb-16">
+          {/* G2 */}
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-[#FF492C] rounded-full flex items-center justify-center text-white font-bold text-xs">
+              G2
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="font-bold text-gray-900 text-lg">G2</span>
+              <span className="font-bold text-gray-900 text-lg">4.6/5</span>
+              <span className="text-gray-500 text-[15px]">(772)</span>
+            </div>
+          </div>
+
+          <div className="hidden md:block w-px h-6 bg-gray-200"></div>
+
+          {/* Trustpilot */}
+          <div className="flex items-center gap-3">
+            <div className="flex text-[#00B67A]">
+              <Star className="w-7 h-7 fill-current" />
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="font-bold text-gray-900 text-lg">Trustpilot</span>
+              <span className="font-bold text-gray-900 text-lg">4.7/5</span>
+              <span className="text-gray-500 text-[15px]">(724)</span>
+            </div>
+          </div>
+
+          <div className="hidden md:block w-px h-6 bg-gray-200"></div>
+
+          {/* Google */}
+          <div className="flex items-center gap-3">
+            <svg className="w-7 h-7" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+            </svg>
+            <div className="flex items-center gap-1.5">
+              <span className="font-bold text-gray-900 text-lg">Google</span>
+              <span className="font-bold text-gray-900 text-lg">4.3/5</span>
+              <span className="text-gray-500 text-[15px]">(192)</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Company Logos */}
+        <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16 opacity-40 grayscale mb-16">
+          <div className="text-2xl font-bold tracking-tighter">NetApp</div>
+          <div className="text-2xl font-black border-2 border-current px-2 rounded">USI</div>
+          <div className="text-2xl font-serif italic">Vedantu</div>
+          <div className="text-2xl font-bold">GoDaddy</div>
+          <div className="text-2xl font-bold tracking-widest">CLOUD</div>
+        </div>
+
+        {/* Certifications */}
+        <div className="flex flex-wrap items-center justify-center gap-8 text-gray-400 text-[15px] font-medium">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-5 h-5" />
+            <span>SOC 2</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Lock className="w-5 h-5" />
+            <span>ISO 27001</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Shield className="w-5 h-5" />
+            <span>GDPR</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard><DashboardHome /></Dashboard>} />
+        <Route path="/email-templates" element={<Dashboard><EmailTemplates /></Dashboard>} />
+        <Route path="/pipeline-runner" element={<Dashboard><PipelineRunner /></Dashboard>} />
+        <Route path="/prospects" element={<Dashboard><Prospects /></Dashboard>} />
+        <Route path="/campaigns" element={<Dashboard><Campaigns /></Dashboard>} />
+        <Route path="/follow-ups" element={<Dashboard><FollowUps /></Dashboard>} />
+        <Route path="/inbox" element={<Dashboard><Inbox /></Dashboard>} />
+        <Route path="/analytics" element={<Dashboard><Analytics /></Dashboard>} />
+        <Route path="/crm" element={<Dashboard><CRM /></Dashboard>} />
+        <Route path="/settings" element={<Dashboard><Settings /></Dashboard>} />
+        <Route path="/help" element={<Dashboard><Help /></Dashboard>} />
+      </Routes>
+    </Router>
+  );
+}
+</file>
+
+</files>
